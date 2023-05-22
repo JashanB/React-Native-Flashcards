@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
@@ -29,14 +29,17 @@ const Stack = createNativeStackNavigator();
 //Main display
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const [difficulty, setDifficulty] = useState('easy');
 
-  const handleGameClick = (destination) => {
-    navigation.navigate(destination);
+  const handleGameClick = (screenName) => {
+    navigation.navigate(screenName, { difficulty });
   };
 
   return (
     <View style={styles.container}>
-      <Button title="Addition" onPress={() => handleGameClick()} />
+      <Button title="Addition" onPress={() => handleGameClick('AdditionScreen')} />
+      <Button title="Subtraction" onPress={() => handleGameClick('SubtractionScreen')} />
+      <Button title="Set Difficulty to Hard" onPress={() => setDifficulty('hard')} />
     </View>
   );
 };
@@ -47,7 +50,8 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="GameScreen" component={GameScreen} />
+        <Stack.Screen name="AdditionScreen" component={GameScreen} />
+        <Stack.Screen name="SubtractionScreen" component={GameScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
