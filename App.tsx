@@ -19,40 +19,35 @@ type SectionProps = PropsWithChildren<{
 }>;
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import GameScreen from './components/gameScreen/Gamescreen';
+import GameScreen from './components/gameScreen/GameScreen';
 const Stack = createNativeStackNavigator();
 
 /*
 
 */
+
+//Main display
 const HomeScreen = () => {
   const navigation = useNavigation();
 
-  const handleButtonClick = () => {
-    navigation.navigate('SecondScreen');
+  const handleGameClick = (destination) => {
+    navigation.navigate(destination);
   };
 
   return (
     <View style={styles.container}>
-      <Button title="Go to Second Screen" onPress={handleButtonClick} />
+      <Button title="Addition" onPress={() => handleGameClick()} />
     </View>
   );
 };
 
-const SecondScreen = () => {
-  return (
-    <View style={styles.container}>
-      {/* Content of the second screen */}
-    </View>
-  );
-};
-
+//Nav
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="SecondScreen" component={SecondScreen} />
+        <Stack.Screen name="GameScreen" component={GameScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
