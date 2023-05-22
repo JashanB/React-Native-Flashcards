@@ -17,7 +17,10 @@ import {
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import GameScreen from './components/gameScreen/Gamescreen';
+const Stack = createNativeStackNavigator();
 
 /*
 
