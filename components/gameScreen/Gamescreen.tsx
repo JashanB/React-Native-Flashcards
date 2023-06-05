@@ -23,7 +23,6 @@ const GameScreen = ({ route }) => {
     const [next, setNext] = useState(false);
     const [num1, setNum1] = useState(0);
     const [num2, setNum2] = useState(0);
-    const [answer, setAnswer] = useState(0);
 
     // console.log(paramsObj)
     // console.log(difficulty, game)
@@ -64,7 +63,8 @@ const GameScreen = ({ route }) => {
             {/* Content of the second screen */}
             <Text>Game Mode: {game}</Text>
             <Text>Difficulty: {difficulty}</Text>
-            <Text>Question: {difficulty}</Text>
+            {game === 'addition' ? <Text>Question: {num1} + {num2} = {num1 + num2}</Text> : <Text>Question: {num1} - {num2} = {num1 - num2}</Text>}
+            <Text></Text>
         </View>
     );
 };
