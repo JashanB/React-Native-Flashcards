@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import type {PropsWithChildren} from 'react';
+import type { PropsWithChildren } from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -20,6 +19,8 @@ type SectionProps = PropsWithChildren<{
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import GameScreen from './components/gameScreen/GameScreen';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 const Stack = createNativeStackNavigator();
 
 /*
@@ -31,16 +32,21 @@ const HomeScreen = () => {
   const navigation = useNavigation();
   const [difficulty, setDifficulty] = useState('easy');
 
+  // const handleGameClick = (screenName) => {
+  //   navigation.navigate(screenName, { difficulty });
+  // };
   const handleGameClick = (screenName) => {
     navigation.navigate(screenName, { difficulty });
   };
 
   return (
-    <View style={styles.container}>
-      <Button title="Addition" onPress={() => handleGameClick('AdditionScreen')} />
-      <Button title="Subtraction" onPress={() => handleGameClick('SubtractionScreen')} />
-      <Button title="Set Difficulty to Hard" onPress={() => setDifficulty('hard')} />
-    </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={styles.container}>
+        <Button title="Addition" onPress={() => handleGameClick('AdditionScreen')} />
+        <Button title="Subtraction" onPress={() => handleGameClick('SubtractionScreen')} />
+        <Button title="Set Difficulty to Hard" onPress={() => setDifficulty('hard')} />
+      </View>
+    </SafeAreaView>
   );
 };
 
