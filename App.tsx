@@ -18,7 +18,7 @@ type SectionProps = PropsWithChildren<{
 }>;
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import GameScreen from './components/gameScreen/GameScreen';
+// import GameScreen from './components/gameScreen/GameScreen';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Stack = createNativeStackNavigator();
@@ -35,15 +35,24 @@ const HomeScreen = () => {
   // const handleGameClick = (screenName) => {
   //   navigation.navigate(screenName, { difficulty });
   // };
-  const handleGameClick = (screenName) => {
-    navigation.navigate(screenName, { difficulty });
+  const handleGameClick = () => {
+    navigation.navigate();
   };
 
+  // return (
+  //   <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+  //     <View style={styles.container}>
+  //       <Button title="Addition" onPress={() => handleGameClick('AdditionScreen')} />
+  //       <Button title="Subtraction" onPress={() => handleGameClick('SubtractionScreen')} />
+  //       <Button title="Set Difficulty to Hard" onPress={() => setDifficulty('hard')} />
+  //     </View>
+  //   </SafeAreaView>
+  // );
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <View style={styles.container}>
-        <Button title="Addition" onPress={() => handleGameClick('AdditionScreen')} />
-        <Button title="Subtraction" onPress={() => handleGameClick('SubtractionScreen')} />
+        <Button title="Addition" onPress={() => handleGameClick()} />
+        <Button title="Subtraction" onPress={() => handleGameClick()} />
         <Button title="Set Difficulty to Hard" onPress={() => setDifficulty('hard')} />
       </View>
     </SafeAreaView>
@@ -56,8 +65,8 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="AdditionScreen" component={GameScreen} />
-        <Stack.Screen name="SubtractionScreen" component={GameScreen} />
+        {/* <Stack.Screen name="AdditionScreen" component={GameScreen} />
+        <Stack.Screen name="SubtractionScreen" component={GameScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
