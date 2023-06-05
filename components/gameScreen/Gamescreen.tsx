@@ -28,7 +28,7 @@ const GameScreen = ({ route }) => {
     // console.log(paramsObj)
     // console.log(difficulty, game)
     let thirdVar = 0;
-    
+
     const checkCorrect = (input, gameMode) => {
         setAnswered(state => true);
         if (gameMode === 'addition') {
@@ -41,16 +41,30 @@ const GameScreen = ({ route }) => {
 
     useEffect(() => {
         if (game === 'addition') {
-            setNum1(state => (Math.floor(Math.random() * 90) + 10));
-            setNum2(state => (Math.floor(Math.random() * 90) + 10));
-
+            if (difficulty === 'easy') {
+                setNum1(state => (Math.floor(Math.random() * 10)));
+                setNum2(state => (Math.floor(Math.random() * 10)));
+            } else {
+                setNum1(state => (Math.floor(Math.random() * 90) + 10));
+                setNum2(state => (Math.floor(Math.random() * 90) + 10));
+            }
         } else if (game === 'subtraction') {
-            setNum1(state => (Math.floor(Math.random() * 90) + 10));
-            setNum2(state => (Math.floor(Math.random() * 90) + 10));
-            if (num2 > num1) {
-                thirdVar = num1
-                setNum1(state => (num2));
-                setNum2(state => (thirdVar));
+            if (difficulty === 'easy') {
+                setNum1(state => (Math.floor(Math.random() * 10)));
+                setNum2(state => (Math.floor(Math.random() * 10)));
+                if (num2 > num1) {
+                    thirdVar = num1
+                    setNum1(state => (num2));
+                    setNum2(state => (thirdVar));
+                }
+            } else {
+                setNum1(state => (Math.floor(Math.random() * 90) + 10));
+                setNum2(state => (Math.floor(Math.random() * 90) + 10));
+                if (num2 > num1) {
+                    thirdVar = num1
+                    setNum1(state => (num2));
+                    setNum2(state => (thirdVar));
+                }
             }
         }
     }, [answered])
@@ -67,6 +81,10 @@ const GameScreen = ({ route }) => {
     need to implement check answer function to ocmpare input to actual
     
     need to add score tracker and next question button 
+
+    reset input after answered 
+
+    submit button changes to next button after regardless
 */
 
     return (
@@ -75,7 +93,7 @@ const GameScreen = ({ route }) => {
             <Text>Game Mode: {game}</Text>
             <Text>Difficulty: {difficulty}</Text>
             {game === 'addition' ? <Text>Question: {num1} + {num2} = </Text> : <Text>Question: {num1} - {num2} = </Text>}
-            <TextInput keyboardType="number-pad"  placeholder="Type here!"></TextInput>
+            <TextInput keyboardType="number-pad" placeholder="Type here!"></TextInput>
             {game === 'addition' ? <Button title="Submit" onPress={() => checkCorrect((num1 + num2), 'addition')} /> : <Button title="Submit" onPress={() => checkCorrect((num1 - num2), 'subtraction')} />}
             {correct ? <Text>Correct?: yes</Text> : <Text>Correct?: no</Text>}
             {/* {
