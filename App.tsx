@@ -32,15 +32,15 @@ const HomeScreen = () => {
   const navigation = useNavigation();
   const [difficulty, setDifficulty] = useState('easy');
 
-  const handleGameClick = (screenName) => {
-    navigation.navigate(screenName, { difficulty });
+  const handleGameClick = (screenName, game) => {
+    navigation.navigate(screenName, { 'difficulty': difficulty, 'game': game });
   };
-  
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <View style={styles.container}>
-        <Button title="Addition" onPress={() => handleGameClick('AdditionScreen')} />
-        <Button title="Subtraction" onPress={() => handleGameClick('SubtractionScreen')} />
+        <Button title="Addition" onPress={() => handleGameClick('AdditionScreen', 'addition')} />
+        <Button title="Subtraction" onPress={() => handleGameClick('SubtractionScreen', 'subtraction')} />
         <Button title="Set Difficulty to Hard" onPress={() => setDifficulty('hard')} />
       </View>
     </SafeAreaView>
