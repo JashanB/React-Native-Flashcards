@@ -24,6 +24,7 @@ const GameScreen = ({ route }) => {
     const [num2, setNum2] = useState(0);
     const [answered, setAnswered] = useState(false);
     const [correct, setCorrect] = useState(false);
+    const [score, setScore] = useState(0);
 
     // console.log(paramsObj)
     // console.log(difficulty, game)
@@ -32,10 +33,20 @@ const GameScreen = ({ route }) => {
     const checkCorrect = (input, gameMode) => {
         setAnswered(state => true);
         if (gameMode === 'addition') {
-            input === (num1 + num2) ? setCorrect(state => true) : setCorrect(state => false);
+            if (input === (num1 + num2)) {
+                setCorrect(state => true);
+                setScore(state => state +=1);
+            } else {
+                setCorrect(state => false);
+            }
 
         } else if (gameMode === 'subtraction') {
-            input === (num1 - num2) ? setCorrect(state => true) : setCorrect(state => false);
+            if (input === (num1 - num2)) {
+                setCorrect(state => true);
+                setScore(state => state +=1);
+            } else {
+                setCorrect(state => false);
+            }
         }
     }
 
@@ -84,7 +95,8 @@ const GameScreen = ({ route }) => {
 
     reset input after answered 
 
-    submit button changes to next button after regardless
+
+    after q submitted, have overlay screen come down, shoes either correct or almost, what the q really equals, and total score
 */
 
     return (
@@ -92,6 +104,7 @@ const GameScreen = ({ route }) => {
             {/* Content of the second screen */}
             <Text>Game Mode: {game}</Text>
             <Text>Difficulty: {difficulty}</Text>
+            <Text>Score: {score}</Text>
             {game === 'addition' ? <Text>Question: {num1} + {num2} = </Text> : <Text>Question: {num1} - {num2} = </Text>}
             <TextInput keyboardType="number-pad" placeholder="Type here!"></TextInput>
             {game === 'addition' ? <Button title="Submit" onPress={() => checkCorrect((num1 + num2), 'addition')} /> : <Button title="Submit" onPress={() => checkCorrect((num1 - num2), 'subtraction')} />}
